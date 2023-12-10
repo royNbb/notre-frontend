@@ -1,5 +1,5 @@
-import { Categories } from "./category";
-import { Tags } from "./tag";
+import { Category } from "./category";
+import { Tag } from "./tag";
 import { User } from "./user";
 
 export interface Material {
@@ -9,8 +9,8 @@ export interface Material {
   description: string;
   content: string;
   owner: User;
-  categories: Categories;
-  tags: Tags[];
+  categories: Category[];
+  tags: Tag[];
   createdAt: number;
   updatedAt: number;
 }

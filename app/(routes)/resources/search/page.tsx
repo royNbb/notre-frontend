@@ -76,14 +76,7 @@ export default function Search() {
           </Link>
         </div>
       ) : (
-        data?.data.map((item, index) => (
-          <MaterialCard
-            key={index}
-            title={item.title}
-            description={item.description}
-            contenType='application/pdf'
-          />
-        ))
+        data?.data.map((item, index) => <MaterialCard key={index} {...item} />)
       )}
     </div>
   );
