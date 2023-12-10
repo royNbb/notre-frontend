@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { fonts } from "./fonts";
-
 import "./globals.css";
 import { ChakraProviders } from "./providers/chakra-providers";
-
+import { twMerge } from "tailwind-merge";
+import { SWRProviders } from "./providers/swr-providers";
 
 export const metadata: Metadata = {
   title: "Jawabanku",
@@ -17,8 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={fonts.inter.className}>
-        <ChakraProviders>{children}</ChakraProviders>
+      <body
+        className={twMerge(fonts.inter.className, "flex flex-col min-h-screen")}
+      >
+        <ChakraProviders>
+          <SWRProviders>{children}</SWRProviders>
+        </ChakraProviders>
       </body>
     </html>
   );
