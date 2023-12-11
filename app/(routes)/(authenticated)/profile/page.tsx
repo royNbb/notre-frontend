@@ -71,6 +71,7 @@ export default function Me() {
         status: "success",
         duration: 2000,
         isClosable: true,
+        position: "top",
       });
 
       resetEdit(user);
@@ -82,6 +83,7 @@ export default function Me() {
         status: "error",
         duration: 2000,
         isClosable: true,
+        position: "top",
       });
     }
   };
@@ -112,6 +114,7 @@ export default function Me() {
         status: "success",
         duration: 2000,
         isClosable: true,
+        position: "top",
       });
     } catch (err: any) {
       toast({
@@ -120,6 +123,7 @@ export default function Me() {
         status: "error",
         duration: 2000,
         isClosable: true,
+        position: "top",
       });
     }
   };
@@ -175,7 +179,7 @@ export default function Me() {
             ) : (
               <Input
                 value={name}
-                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 onChange={(e) => setName(e.target.value)}
               />
             )}
@@ -185,7 +189,7 @@ export default function Me() {
             ) : (
               <Input
                 value={email}
-                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 onChange={(e) => setEmail(e.target.value)}
               />
             )}
@@ -195,7 +199,7 @@ export default function Me() {
             ) : (
               <Input
                 value={username}
-                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 onChange={(e) => setUsername(e.target.value)}
               />
             )}
@@ -204,13 +208,13 @@ export default function Me() {
           {!editMode ? (
             <div className='flex justify-evenly w-full'>
               <button
-                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={() => setEditMode((editMode) => !editMode)}
               >
                 Edit Profile
               </button>
               <button
-                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={onOpen}
               >
                 Change Password
@@ -219,7 +223,7 @@ export default function Me() {
           ) : (
             <div className='flex justify-evenly w-full'>
               <button
-                className='w-1/3 py-3 px-4 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={() => {
                   resetEdit(user);
                   setEditMode(false);
@@ -228,7 +232,7 @@ export default function Me() {
                 Cancel
               </button>
               <button
-                className='w-1/3 py-3 px-4 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={handleEdit}
               >
                 Submit
@@ -250,14 +254,14 @@ export default function Me() {
               <p className='font-bold pt-3'>Old Password :</p>
               <Input
                 placeholder='Type your old password'
-                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 onChange={(e) => setOldPassword(e.target.value)}
               />
 
               <p className='font-bold pt-3'>New Password :</p>
               <Input
                 placeholder='Input your new password'
-                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
@@ -266,13 +270,13 @@ export default function Me() {
           <ModalFooter>
             <div className='flex justify-evenly w-full'>
               <button
-                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={onClose}
               >
                 Cancel
               </button>
               <button
-                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='w-1/3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:pointer-events-none'
                 onClick={handleChangePassword}
               >
                 Submit

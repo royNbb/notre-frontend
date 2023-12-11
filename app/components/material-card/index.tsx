@@ -41,7 +41,7 @@ const MaterialCard: FC<Material> = (props) => {
       className='col-span-3 md:col-span-2 lg:col-span-4 shadow-md rounded-xl px-4 py-2 group cursor-pointer flex flex-col gap-2'
     >
       <div className='flex justify-between gap-2 items-center'>
-        <h3 className='line-clamp-2 group-hover:text-blue-600 font-semibold text-sm lg:text-base text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200'>
+        <h3 className='line-clamp-2 group-hover:text-blue-600 font-semibold text-sm lg:text-base text-gray-800'>
           {props.title}
         </h3>
         <FileIcon extension={getFileExtension(props.content)} />

@@ -13,20 +13,20 @@ const Navbar: FC = () => {
   return (
     <header className='flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm sticky top-0 '>
       <nav
-        className='mt-6 relative max-w-screen-xl w-full backdrop-blur-md bg-white/30 border border-gray-200 rounded-[36px] mx-2 py-3 px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto dark:bg-gray-800 dark:border-gray-700'
+        className='mt-6 relative max-w-screen-xl w-full backdrop-blur-md bg-white/30 border border-gray-200 rounded-[36px] mx-2 py-3 px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto'
         aria-label='Global'
       >
         <div className='flex items-center justify-between'>
           <Link
             href='/'
-            className='flex-none text-xl font-semibold dark:text-white'
+            className='flex-none text-xl font-semibold'
           >
             JawabanKu
           </Link>
           <div className='md:hidden'>
             <button
               type='button'
-              className='hs-collapse-toggle w-8 h-8 flex justify-center items-center text-sm font-semibold rounded-full border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='hs-collapse-toggle w-8 h-8 flex justify-center items-center text-sm font-semibold rounded-full border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none'
               data-hs-collapse='#navbar-collapse-with-animation'
               aria-controls='navbar-collapse-with-animation'
               aria-label='Toggle navigation'
@@ -74,8 +74,8 @@ const Navbar: FC = () => {
             <Link
               href='/'
               className={twMerge(
-                "font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500",
-                pathname === "/" && "text-blue-600 dark:text-blue-500"
+                "font-medium text-gray-500 hover:text-gray-400 md:py-6",
+                pathname === "/" && "text-blue-600"
               )}
             >
               Home
@@ -83,8 +83,8 @@ const Navbar: FC = () => {
             <Link
               href='/resources'
               className={twMerge(
-                "font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500",
-                pathname === "/resources" && "text-blue-600 dark:text-blue-500"
+                "font-medium text-gray-500 hover:text-gray-400 md:py-6",
+                pathname === "/resources" && "text-blue-600"
               )}
             >
               Resources
@@ -93,8 +93,8 @@ const Navbar: FC = () => {
             <Link
               href='/categories'
               className={twMerge(
-                "font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500",
-                pathname === "/categories" && "text-blue-600 dark:text-blue-500"
+                "font-medium text-gray-500 hover:text-gray-400 md:py-6",
+                pathname === "/categories" && "text-blue-600"
               )}
             >
               Categories
@@ -102,8 +102,8 @@ const Navbar: FC = () => {
 
             <Link
               className={twMerge(
-                "flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500",
-                pathname === "/profile" && "text-blue-600 dark:text-blue-500"
+                "flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6",
+                pathname === "/profile" && "text-blue-600"
               )}
               href={status == "authenticated" ? "/profile" : "/login"}
             >

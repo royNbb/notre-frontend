@@ -42,12 +42,12 @@ export default function Search() {
     <div className='max-w-screen-xl grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-x-6 gap-y-6 mx-auto'>
       <div className='py-10 lg:pt-16 col-span-3 md:col-span-6 lg:col-span-12'>
         <h2 id='marketing' className='scroll-mt-12 mb-2'>
-          <a className='text-blue-600 hover:text-blue-500 text-2xl font-semibold dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'>
+          <a className='text-blue-600 hover:text-blue-500 text-2xl font-semibold'>
             {title ?? category}
           </a>
         </h2>
 
-        <p className='text-sm text-gray-600 dark:text-gray-400'>
+        <p className='text-sm text-gray-600'>
           Learning resources for "{title ?? category}"
         </p>
       </div>
@@ -70,7 +70,7 @@ export default function Search() {
 
           <Link
             href='/categories'
-            className='max-w-sm mt-8 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800'
+            className='max-w-sm mt-8 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4'
           >
             Explore Other Resources
           </Link>
