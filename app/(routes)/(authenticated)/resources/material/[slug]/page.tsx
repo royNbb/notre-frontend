@@ -1,26 +1,8 @@
-import Link from "next/link";
-import { FaExclamationTriangle } from "react-icons/fa";
 import { Material } from "@/app/interfaces/material";
 import { getIdFromSlug } from "@/app/utils/get-id-from-slug";
 import ReportModal from "@/app/components/material-details";
-import dayjs from "dayjs";
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { CiFileOn } from "react-icons/ci";
-
-
 import { Comment } from "@/app/interfaces/comment";
 import CommentsList from "@/app/components/comment-list";
-
 
 async function getData(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -38,7 +20,6 @@ async function getData(slug: string) {
 
     return res.json().then((data) => data.data);
   } catch (error) {
-    console.log(error);
     throw new Error("Failed to fetch data");
   }
 }
@@ -46,11 +27,12 @@ async function getComments(materialId: number): Promise<Comment[]> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   try {
-    const res = await fetch(`${baseUrl}/comment/?is_by_owner=False&material=${materialId}`, {
-      cache: "no-store",
-    });
-    console.log("SUDAH COBA AMBIL COMMENT")
-    console.log(res.ok)
+    const res = await fetch(
+      `${baseUrl}/comment/?is_by_owner=False&material=${materialId}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch comments");
@@ -62,13 +44,11 @@ async function getComments(materialId: number): Promise<Comment[]> {
   }
 }
 
-
 export default async function MaterialDetails({
   params,
 }: {
   params: { slug: string };
 }) {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   try {
     const data: Material = await getData(params.slug);
     const commentsData: Comment[] = await getComments(data.id);
@@ -76,7 +56,7 @@ export default async function MaterialDetails({
     return (
       <div>
         <ReportModal data={data} type={"material"} />
-        {<CommentsList comments={commentsData} />}
+        {<CommentsList comments={commentsData} type={"comment"} />}
       </div>
     );
   } catch (error) {
