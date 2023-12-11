@@ -63,17 +63,17 @@ export default function Login() {
   return (
     <form
       onSubmit={handleSubmit}
-      className='max-w-sm mt-48 bg-white border border-gray-200 rounded-xl shadow-xl dark:bg-gray-800 dark:border-gray-700 mx-auto'
+      className='max-w-sm mt-48 bg-white border border-gray-200 rounded-xl shadow-xl mx-auto'
     >
       <div className='p-4 sm:p-7'>
         <div className='text-center'>
-          <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
+          <h1 className='block text-2xl font-bold text-gray-800'>
             Sign in
           </h1>
-          <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+          <p className='mt-2 text-sm text-gray-600'>
             Don't have an account yet?{" "}
             <Link
-              className='text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='text-blue-600 decoration-2 hover:underline font-medium '
               href='/register'
             >
               Sign up here
@@ -82,7 +82,7 @@ export default function Login() {
         </div>
 
         <div className='mt-5 flex flex-col gap-4'>
-          <div className='py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600'>
+          <div className='py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6'>
             Or
           </div>
 
@@ -106,7 +106,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className='w-full h-12 mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+            className='w-full h-12 mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none '
           >
             {!isPressed ? "Sign in" : <Spinner size='sm' />}
           </button>

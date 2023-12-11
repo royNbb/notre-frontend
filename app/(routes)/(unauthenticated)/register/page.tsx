@@ -12,12 +12,6 @@ export default function Register() {
   const toast = useToast();
   const router = useRouter();
 
-  const { status } = useSession();
-
-  if (status == "authenticated") {
-    router.push("/");
-  }
-
   let apiUrl = `${baseUrl}/users/`;
 
   const [email, setEmail] = useState("");
@@ -57,18 +51,24 @@ export default function Register() {
     }
   };
 
+  const { status } = useSession();
+
+  if (status == "authenticated") {
+    router.push("/");
+  }
+
   return (
     <div className='w-full max-w-lg mx-auto p-6 flex justify-center pt-16'>
-      <div className='mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700 w-full'>
+      <div className='mt-7 bg-white border border-gray-200 rounded-xl shadow-sm w-full'>
         <div className='p-4 sm:p-7'>
           <div className='text-center'>
-            <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
+            <h1 className='block text-2xl font-bold text-gray-800'>
               Sign up
             </h1>
-            <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+            <p className='mt-2 text-sm text-gray-600'>
               Already have an account?{" "}
               <Link
-                className='text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                className='text-blue-600 decoration-2 hover:underline font-medium'
                 href='/login'
               >
                 Sign up here
@@ -82,7 +82,7 @@ export default function Register() {
                 <div>
                   <label
                     htmlFor='email'
-                    className='block text-sm mb-2 dark:text-white'
+                    className='block text-sm mb-2'
                   >
                     Email address
                   </label>
@@ -91,7 +91,7 @@ export default function Register() {
                       type='email'
                       id='email'
                       name='email'
-                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                       required
                       aria-describedby='email-error'
                       onChange={(e) => setEmail(e.target.value)}
@@ -121,7 +121,7 @@ export default function Register() {
                 <div>
                   <label
                     htmlFor='username'
-                    className='block text-sm mb-2 dark:text-white'
+                    className='block text-sm mb-2'
                   >
                     Username
                   </label>
@@ -130,7 +130,7 @@ export default function Register() {
                       type='text'
                       id='username'
                       name='username'
-                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                       required
                       aria-describedby='password-error'
                       onChange={(e) => setUsername(e.target.value)}
@@ -159,7 +159,7 @@ export default function Register() {
                 <div>
                   <label
                     htmlFor='name'
-                    className='block text-sm mb-2 dark:text-white'
+                    className='block text-sm mb-2'
                   >
                     Name
                   </label>
@@ -168,7 +168,7 @@ export default function Register() {
                       type='name'
                       id='name'
                       name='name'
-                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                       required
                       aria-describedby='password-error'
                       onChange={(e) => setName(e.target.value)}
@@ -197,7 +197,7 @@ export default function Register() {
                 <div>
                   <label
                     htmlFor='password'
-                    className='block text-sm mb-2 dark:text-white'
+                    className='block text-sm mb-2'
                   >
                     Password
                   </label>
@@ -206,7 +206,7 @@ export default function Register() {
                       type='password'
                       id='password'
                       name='password'
-                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
+                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                       required
                       aria-describedby='password-error'
                       onChange={(e) => setPassword(e.target.value)}
@@ -234,7 +234,7 @@ export default function Register() {
 
                 <button
                   type='submit'
-                  className='w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                  className='w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'
                 >
                   Sign up
                 </button>
