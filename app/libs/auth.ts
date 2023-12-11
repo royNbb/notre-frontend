@@ -26,26 +26,14 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify(credentialDetails),
         });
 
-        const token = await res.json();
+        const user = await res.json();
 
         if (!res.ok) {
-          throw new Error(token.detail);
-        }
-
-        const response = await fetch(baseUrl + "/users/me", {
-          headers: {
-            Authorization: "JWT " + token.access,
-          },
-        });
-
-        const user = await response.json();
-
-        if (!response.ok) {
           throw new Error(user.detail);
         }
 
         if (user) {
-          return { ...user, ...token };
+          return user;
         } else {
           return null;
         }
@@ -53,13 +41,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (account && user) {
+    async jwt({ token, user }) {
+      if (user) {
         return {
           ...token,
           accessToken: user.access,
-          username: user.username,
-          id: user.id
         };
       }
       return token;
@@ -67,12 +53,6 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {  
       session.accessToken = token.accessToken;
-    
-      if (session.user) {
-        session.user.id = token.id;
-        session.user.username = token.username;
-      }
-      
       return session;
     }
   },

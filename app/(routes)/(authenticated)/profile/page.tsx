@@ -24,7 +24,7 @@ export default function Me() {
   let updateUrl = `${baseUrl}/users/update/`;
   let passwordUrl = `${baseUrl}/users/change-password/`;
 
-  const { data } = useSession();
+  const { data, status } = useSession();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -45,7 +45,6 @@ export default function Me() {
     setName(user.name);
     setEmail(user.email);
     setUsername(user.username);
-
     setNewPassword("");
     setOldPassword("");
   };
@@ -125,9 +124,9 @@ export default function Me() {
     }
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
+  const fetchUser = async () => {
+    try {
+      if (status == "authenticated") {
         const response = await api.get<User>(apiUrl, {
           headers: {
             Authorization: `JWT ${data?.accessToken}`,
@@ -135,16 +134,18 @@ export default function Me() {
         });
         setUser(response.data);
         resetEdit(response.data);
-      } catch (err: any) {
-        alert(JSON.stringify(err.response.data, null, 2));
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    } catch (err: any) {
+      alert(JSON.stringify(err.response.data, null, 2));
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchUser();
-  }, []);
+  }, [status]);
 
   if (error) {
     return <div>Something went wrong: {error}</div>;
@@ -153,7 +154,11 @@ export default function Me() {
   return (
     <div className='w-full h-full flex justify-center items-center pt-10 text-2xl'>
       {isLoading ? (
-        <Spinner />
+        <div className='col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4 mt-24'>
+          <h2 className='text-center text-gray-300 text-5xl md:text-7xl font-extrabold'>
+            Loading...
+          </h2>
+        </div>
       ) : user ? (
         <div className='flex flex-col items-center'>
           <div className='w-48 h-48 overflow-hidden rounded-full mb-10'>

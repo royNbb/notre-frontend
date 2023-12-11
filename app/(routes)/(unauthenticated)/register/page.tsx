@@ -12,12 +12,6 @@ export default function Register() {
   const toast = useToast();
   const router = useRouter();
 
-  const { status } = useSession();
-
-  if (status == "authenticated") {
-    router.push("/");
-  }
-
   let apiUrl = `${baseUrl}/users/`;
 
   const [email, setEmail] = useState("");
@@ -56,6 +50,12 @@ export default function Register() {
       });
     }
   };
+
+  const { status } = useSession();
+
+  if (status == "authenticated") {
+    router.push("/");
+  }
 
   return (
     <div className='w-full max-w-lg mx-auto p-6 flex justify-center pt-16'>

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar: FC = () => {
   const pathname = usePathname();
@@ -101,7 +101,10 @@ const Navbar: FC = () => {
             </Link>
 
             <Link
-              className='flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500'
+              className={twMerge(
+                "flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500",
+                pathname === "/profile" && "text-blue-600 dark:text-blue-500"
+              )}
               href={status == "authenticated" ? "/profile" : "/login"}
             >
               <svg
@@ -121,6 +124,28 @@ const Navbar: FC = () => {
               </svg>
               {status == "authenticated" ? "Profile" : "Login"}
             </Link>
+            {status == "authenticated" && (
+              <div
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className='cursor-pointer flex items-center gap-x-2 font-medium text-red-600 md:border-s md:border-gray-300 md:my-6 md:ps-6'
+              >
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={1.5}
+                  stroke='currentColor'
+                  className='w-4 h-4'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M5.636 5.636a9 9 0 1012.728 0M12 3v9'
+                  />
+                </svg>
+                Logout
+              </div>
+            )}
           </div>
         </div>
       </nav>
