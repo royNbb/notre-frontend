@@ -16,8 +16,8 @@ const Navbar: FC = () => {
         className="mt-6 relative max-w-screen-xl w-full backdrop-blur-md bg-white/30 border border-gray-200 rounded-[36px] mx-2 py-3 px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto"
         aria-label="Global"
       >
-        <div className='flex items-center justify-between'>
-          <Link href='/' className='flex-none text-xl font-semibold'>
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex-none text-xl font-semibold">
             JawabanKu
           </Link>
           <div className="md:hidden">
@@ -99,7 +99,7 @@ const Navbar: FC = () => {
 
             {status == "authenticated" && (
               <Link
-                href='/history'
+                href="/history"
                 className={twMerge(
                   "font-medium text-gray-500 hover:text-gray-400 md:py-6",
                   pathname === "/history" && "text-blue-600"
@@ -108,16 +108,6 @@ const Navbar: FC = () => {
                 History
               </Link>
             )}
-
-            <Link
-              href="/history"
-              className={twMerge(
-                "font-medium text-gray-500 hover:text-gray-400 md:py-6",
-                pathname === "/history" && "text-blue-600"
-              )}
-            >
-              History
-            </Link>
 
             <Link
               className={twMerge(
