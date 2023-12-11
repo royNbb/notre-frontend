@@ -4,6 +4,7 @@ import "./globals.css";
 import { ChakraProviders } from "./providers/chakra-providers";
 import { twMerge } from "tailwind-merge";
 import { SWRProviders } from "./providers/swr-providers";
+import SessionProviderWrapper from "./providers/session-provider";
 
 export const metadata: Metadata = {
   title: "Jawabanku",
@@ -20,9 +21,11 @@ export default function RootLayout({
       <body
         className={twMerge(fonts.inter.className, "flex flex-col min-h-screen")}
       >
-        <ChakraProviders>
-          <SWRProviders>{children}</SWRProviders>
-        </ChakraProviders>
+        <SessionProviderWrapper>
+          <ChakraProviders>
+            <SWRProviders>{children}</SWRProviders>
+          </ChakraProviders>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
