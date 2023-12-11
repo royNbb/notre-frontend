@@ -3,12 +3,10 @@ import { FC } from "react";
 
 const Hero: FC = () => {
   return (
-    <div className="col-span-3 md:col-span-6 lg:col-span-12 h-full overflow-hidden">
-      <div
-        className='flex absolute -z-10 -top-[32rem] start-1/2 transform -translate-x-1/2'
-      >
-        <div className='bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem]'></div>
-        <div className='bg-gradient-to-tl from-blue-50 via-blue-100 to-blue-50 blur-3xl w-[90rem] h-[50rem] rounded-fulls origin-top-left -rotate-12 -translate-x-[15rem]'></div>
+    <div className='col-span-3 md:col-span-6 lg:col-span-12 h-full overflow-hidden'>
+      <div className='flex absolute top-0 left-0 -z-10 w-full'>
+        <div className='bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-full h-48'></div>
+        <div className='bg-gradient-to-tl from-blue-50 via-blue-100 to-blue-50 blur-3xl w-full h-48'></div>
       </div>
       <div className='max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24 md:pb-28'>
         <div className='mt-16 max-w-xl text-center mx-auto'>

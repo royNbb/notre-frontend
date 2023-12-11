@@ -26,9 +26,9 @@ const testimonials = [
 const Testimonials: FC = () => {
   return (
     <>
-      <div className='flex w-full justify-center absolute -z-50 bottom-96 right-[32rem] start-3/4 transform -translate-x-1/2 opacity-50'>
-        <div className='bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem]'></div>
-        <div className='bg-gradient-to-tl from-blue-50 via-blue-100 to-blue-50 blur-3xl w-[90rem] h-[50rem] rounded-fulls origin-top-left -rotate-12 -translate-x-[15rem]'></div>
+      <div className='flex absolute top-[32rem] left-0 -z-50 w-full'>
+        <div className='bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-full h-[40rem] md:h-[30rem]'></div>
+        <div className='bg-gradient-to-tl from-blue-50 via-blue-100 to-blue-50 blur-3xl w-full h-[40rem] md:h-[30rem]'></div>
       </div>
       {testimonials.map((testimonial, index) => (
         <div

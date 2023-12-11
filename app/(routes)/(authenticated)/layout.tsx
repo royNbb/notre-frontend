@@ -9,7 +9,7 @@ export default function BaseLayout({
   return (
     <>
       <Navbar />
-      <main className=' w-full px-4 md:px-8 lg:px-16'>{children}</main>
+      <main className='w-full px-4 md:px-8 lg:px-16'>{children}</main>
       <Footer />
     </>
   );
