@@ -17,6 +17,11 @@ import {
 } from "@chakra-ui/react";
 import { CiFileOn } from "react-icons/ci";
 
+
+import { Comment } from "@/app/interfaces/comment";
+import CommentsList from "@/app/components/comment-list";
+
+
 async function getData(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -37,6 +42,26 @@ async function getData(slug: string) {
     throw new Error("Failed to fetch data");
   }
 }
+async function getComments(materialId: number): Promise<Comment[]> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  try {
+    const res = await fetch(`${baseUrl}/comment/?is_by_owner=False&material=${materialId}`, {
+      cache: "no-store",
+    });
+    console.log("SUDAH COBA AMBIL COMMENT")
+    console.log(res.ok)
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch comments");
+    }
+
+    return res.json().then((data) => data.data);
+  } catch (error) {
+    throw new Error("Failed to fetch comments");
+  }
+}
+
 
 export default async function MaterialDetails({
   params,
@@ -46,12 +71,13 @@ export default async function MaterialDetails({
   // const { isOpen, onOpen, onClose } = useDisclosure();
   try {
     const data: Material = await getData(params.slug);
-    console.log(data);
+    const commentsData: Comment[] = await getComments(data.id);
 
     return (
-      <>
+      <div>
         <ReportModal data={data} type={"material"} />
-      </>
+        {<CommentsList comments={commentsData} />}
+      </div>
     );
   } catch (error) {
     return (
