@@ -11,10 +11,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-function deleteMaterial(id: number) {
+function deleteMaterial(id: number, accessToken?: string) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   return fetch(`${apiUrl}/material/${id}/`, {
     method: "DELETE",
+    headers: {
+      Authorization: `JWT ${accessToken}`,
+    },
   });
 }
 
@@ -94,7 +97,7 @@ export default function UpdateMaterial({
         <Button
           onClick={() => {
             if (!id) return;
-            deleteMaterial(id)
+            deleteMaterial(id, session?.accessToken)
               .then(() => {
                 toast({
                   title: "Successfully deleted material",

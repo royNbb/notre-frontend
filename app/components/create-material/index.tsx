@@ -86,7 +86,7 @@ async function updateMaterial(
     });
     if (!res.ok) {
       onError();
-      return;
+      return undefined;
     }
     return res.json().then((data) => data.data as Material);
   } catch (error) {
@@ -135,6 +135,7 @@ export default function CreateMaterial({
   >(
     initialData?.tags?.map((tag) => ({ value: tag.id, label: tag.name })) ?? []
   );
+  const [isMutatingData, setIsMutatingData] = useState<boolean>(false);
 
   useEffect(() => {
     if (initialData) {
@@ -296,6 +297,7 @@ export default function CreateMaterial({
       )}
       <Button
         onClick={async () => {
+          setIsMutatingData(true);
           if (type === "create") {
             const material = await createMaterial(
               data?.accessToken ?? "",
@@ -343,9 +345,11 @@ export default function CreateMaterial({
               router.push(`/resources/material/${material.slug}`);
             }
           }
+          setIsMutatingData(false);
         }}
         colorScheme="purple"
         className="mt-10 w-60"
+        isLoading={isMutatingData}
       >
         {type === "create" ? "Submit" : "Update"}
       </Button>
