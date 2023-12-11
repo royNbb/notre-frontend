@@ -25,9 +25,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { CiFileOn } from "react-icons/ci";
-import { usePathname } from "next/navigation";
 import React, { FC, useState } from "react";
-import { twMerge } from "tailwind-merge";
 
 export default function ReportModal({
   data,
@@ -42,16 +40,9 @@ export default function ReportModal({
   const [description, setDescription] = useState("");
   const toast = useToast();
 
-  //   const [relatedModelName, setRelatedModelName] = useState("");
-  //   const [id, setId] = useState(1);
   const { data: session } = useSession();
-  const owner = session?.user?.name;
   const handleSubmit = async (data: Report) => {
     const token = session?.accessToken;
-    console.log(token);
-    console.log(data.related_model_app_label);
-    console.log(data.related_model_name);
-    console.log(data.related_model_id);
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const urlPost = `${baseUrl}/report/create/`;
     try {
@@ -83,7 +74,6 @@ export default function ReportModal({
         .then(() => setDescription(""))
         .then(onClose);
     } catch (error) {
-      console.log(error);
       toast({
         title: "Report Cant Be Submitted!",
         description: "Please login to your account",
@@ -206,7 +196,7 @@ export default function ReportModal({
                       fontWeight="bold"
                       fontFamily={"sans-serif"}
                     >
-                      Why are you repoting this post?
+                      Why are you reporting this post?
                     </FormLabel>
                     <FormLabel className="font-bold">
                       Please remember that reporting a material may result in
