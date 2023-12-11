@@ -27,11 +27,13 @@ interface CommentsListProps {
   type: string;
 }
 
+
 const CommentsList: React.FC<CommentsListProps> = ({ comments, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [description, setDescription] = useState("");
   const toast = useToast();
   const { data: session } = useSession();
+  const user = session?.user;
   const handleSubmit = async (data: Report) => {
     const token = session?.accessToken;
     console.log(token);
@@ -80,6 +82,113 @@ const CommentsList: React.FC<CommentsListProps> = ({ comments, type }) => {
       });
     }
   };
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedCommentContent, setEditedCommentContent] = useState("");
+  const [selectedComment, setSelectedComment] = useState(null);
+
+
+  const onEditComment = (comment: Comment) => {
+    // Set the selected comment and open the edit modal
+    setEditedCommentContent(comment.content);
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setEditedCommentContent("");
+    setSelectedComment(null);
+  };
+
+  const handleEditComment = async (comment_id: number, content: string ) => {
+    // Add logic to update the comment using editedCommentContent and selectedComment.id
+    console.log("Editting comment ", comment_id);
+    
+    const token = session?.accessToken;
+    console.log(token);
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const urlPost = `${baseUrl}/comment/${comment_id}`;
+    try {
+      const result = await axios
+        .put(
+          urlPost,
+          {
+            content: content
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          toast({
+            title: "Comment Edited!",
+            status: "success",
+            duration: 4000,
+            position: "top",
+            isClosable: true,
+          });
+        })
+        .then(() => setDescription(""))
+        .then(onClose);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Comment Can't Be Edited!",
+        description: "Check your account",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
+    }
+    closeEditModal();
+  };
+
+  const handleDeleteComment = async (comment_id: number) => {
+    console.log("Deleting comment ", comment_id);
+  
+    const token = session?.accessToken;
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const urlPost = `${baseUrl}/comment/${comment_id}`;
+    
+    try {
+      await axios.delete(urlPost, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${token}`,
+        },
+      });
+  
+      toast({
+        title: "Comment Deleted!",
+        status: "success",
+        duration: 4000,
+        position: "top",
+        isClosable: true,
+      });
+  
+      // Additional logic after successful deletion if needed
+      setDescription("");
+      onClose();
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Comment Deletion Failed!",
+        description: "Check your account",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
+    }
+  
+    closeEditModal();
+  };
+  
+
   return (
     <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto flex flex-col gap-4">
       <div className="mt-8">
@@ -111,13 +220,14 @@ const CommentsList: React.FC<CommentsListProps> = ({ comments, type }) => {
                   </span>
                   <span className="ml-2">{comment.owner.username}</span>
                 </div>
-                {comment.updatedAt && (
+                {comment.updatedAt && (Math.floor((comment.updatedAt - comment.createdAt) / 1000) > 1) && (
                   <div className="text-xs text-gray-500">
                     Updated at:{" "}
-                    {new Date(comment.updatedAt * 1000).toLocaleDateString(
-                      "en-US",
-                      { day: "numeric", month: "long", year: "numeric" }
-                    )}
+                    {new Date(comment.updatedAt * 1000).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </div>
                 )}
               </div>
@@ -206,6 +316,43 @@ const CommentsList: React.FC<CommentsListProps> = ({ comments, type }) => {
                     </ModalFooter>
                   </ModalContent>
                 </Modal>
+              </div>
+              <div>
+              {user && comment.owner.id === user.id && (
+                <>
+                  <button
+                    type="button"
+                    className="ml-2 py-1 px-2 bg-gray-200 text-gray-700 rounded-md hover:bg-red-500 hover:text-white"
+                    onClick={() => onEditComment(comment)}
+                  >
+                    Edit
+                  </button>
+                  <Modal isOpen={isEditModalOpen} onClose={closeEditModal}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Edit Comment</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <FormControl>
+                          <FormLabel>Edit your comment:</FormLabel>
+                          <Textarea
+                            value={editedCommentContent}
+                            onChange={(e) => setEditedCommentContent(e.target.value)}
+                          />
+                        </FormControl>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={() =>handleEditComment(comment.id, editedCommentContent)}>
+                          Edit Comment
+                        </Button>
+                        <Button colorScheme="red" onClick={() =>handleDeleteComment(comment.id)}>
+                          Delete Comment
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </>
+              )}
               </div>
             </li>
           ))}
