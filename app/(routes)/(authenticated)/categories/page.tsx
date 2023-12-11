@@ -6,7 +6,7 @@ async function getData() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   try {
-    const res = await fetch(`${baseUrl}/api/v1/category/`, {
+    const res = await fetch(`${baseUrl}/category/`, {
       cache: "no-store",
     });
 

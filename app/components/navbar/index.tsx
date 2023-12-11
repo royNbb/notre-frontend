@@ -4,9 +4,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
+import { useSession } from "next-auth/react";
 
 const Navbar: FC = () => {
   const pathname = usePathname();
+  const { data, status } = useSession();
 
   return (
     <header className='flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm sticky top-0 '>
@@ -98,9 +100,9 @@ const Navbar: FC = () => {
               Categories
             </Link>
 
-            <a
+            <Link
               className='flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500'
-              href='#'
+              href={status == "authenticated" ? "/profile" : "/login"}
             >
               <svg
                 className='flex-shrink-0 w-4 h-4'
@@ -117,8 +119,8 @@ const Navbar: FC = () => {
                 <path d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2' />
                 <circle cx='12' cy='7' r='4' />
               </svg>
-              Log in
-            </a>
+              {status == "authenticated" ? "Profile" : "Login"}
+            </Link>
           </div>
         </div>
       </nav>

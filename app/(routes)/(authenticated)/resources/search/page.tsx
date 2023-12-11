@@ -12,7 +12,7 @@ export default function Search() {
   const title = searchParams.get("title");
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  let apiUrl = `${baseUrl}/api/v1/material/`;
+  let apiUrl = `${baseUrl}/material/`;
 
   if (category) {
     apiUrl += `?category=${encodeURIComponent(category)}`;

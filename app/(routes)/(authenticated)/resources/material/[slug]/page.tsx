@@ -23,7 +23,7 @@ async function getData(slug: string) {
   const id = getIdFromSlug(slug);
 
   try {
-    const res = await fetch(`${baseUrl}/api/v1/material/${id}/`, {
+    const res = await fetch(`${baseUrl}/material/${id}/`, {
       cache: "no-store",
     });
 
