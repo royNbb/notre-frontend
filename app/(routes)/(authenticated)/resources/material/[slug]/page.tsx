@@ -11,9 +11,9 @@ async function getData(slug: string) {
 
   const id = getIdFromSlug(slug);
 
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
-  try {    
+  try {
     const res = await fetch(`${baseUrl}/material/${id}/`, {
       cache: "no-store",
       headers: {
@@ -68,12 +68,12 @@ export default async function MaterialDetails({
     );
   } catch (error) {
     return (
-      <div className='col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4'>
-        <div className='py-10 lg:pt-32 flex flex-col items-center gap-4'>
-          <h2 className='text-center text-gray-300 text-5xl md:text-7xl font-extrabold'>
+      <div className="col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4">
+        <div className="py-10 lg:pt-32 flex flex-col items-center gap-4">
+          <h2 className="text-center text-gray-300 text-5xl md:text-7xl font-extrabold">
             Shoot!
           </h2>
-          <h2 className='text-center text-gray-600 text-lg'>
+          <h2 className="text-center text-gray-600 text-lg">
             Something bad hapenned. Please try again later.
           </h2>
         </div>

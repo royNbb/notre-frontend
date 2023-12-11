@@ -35,7 +35,11 @@ export default function ReportModal({
   type: string;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isCommentModalOpen, onOpen: onCommentModalOpen, onClose: onCommentModalClose } = useDisclosure();
+  const {
+    isOpen: isCommentModalOpen,
+    onOpen: onCommentModalOpen,
+    onClose: onCommentModalClose,
+  } = useDisclosure();
   const [commentContent, setCommentContent] = useState("");
   const [description, setDescription] = useState("");
   const toast = useToast();
@@ -88,7 +92,7 @@ export default function ReportModal({
   const handleCommentSubmit = async (content: string, material_id: number) => {
     // Add logic to submit the comment, e.g., using an API
     console.log("Submitting comment:", content);
-    
+
     const token = session?.accessToken;
     console.log(token);
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -99,7 +103,7 @@ export default function ReportModal({
           urlPost,
           {
             material: material_id,
-            content: content
+            content: content,
           },
           {
             headers: {
@@ -264,6 +268,14 @@ export default function ReportModal({
             Download File
           </Button>
         </a>
+        <div className="w-full bg-blue-600 rounded-xl py-2.5 font-bold text-white flex justify-center items-center">
+          <Link
+            className="w-full h-full text-center"
+            href={`/resources/material/update/${data.id}`}
+          >
+            Edit Material
+          </Link>
+        </div>
         {data.categories.map((category) => (
           <Link
             key={category.id}
@@ -332,10 +344,11 @@ export default function ReportModal({
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" 
-              mr={3} 
-              onClick={() => 
-                handleCommentSubmit(commentContent, data.id)}>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={() => handleCommentSubmit(commentContent, data.id)}
+              >
                 Submit
               </Button>
               <Button onClick={onCommentModalClose}>Cancel</Button>
