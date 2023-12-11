@@ -3,6 +3,8 @@ import Link from "next/link";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { Material } from "@/app/interfaces/material";
 import { Report } from "@/app/interfaces/report";
+import { Comment } from "@/app/interfaces/comment";
+import { getIdFromSlug } from "@/app/utils/get-id-from-slug";
 import axios from "axios";
 import dayjs from "dayjs";
 import { useSession } from "next-auth/react";
@@ -33,6 +35,8 @@ export default function ReportModal({
   type: string;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isCommentModalOpen, onOpen: onCommentModalOpen, onClose: onCommentModalClose } = useDisclosure();
+  const [commentContent, setCommentContent] = useState("");
   const [description, setDescription] = useState("");
   const toast = useToast();
 
@@ -81,6 +85,57 @@ export default function ReportModal({
     }
   };
 
+  const handleCommentSubmit = async (content: string, material_id: number) => {
+    // Add logic to submit the comment, e.g., using an API
+    console.log("Submitting comment:", content);
+    
+    const token = session?.accessToken;
+    console.log(token);
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const urlPost = `${baseUrl}/comment/`;
+    try {
+      const result = await axios
+        .post(
+          urlPost,
+          {
+            material: material_id,
+            content: content
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          toast({
+            title: "Comment Posted!",
+            status: "success",
+            duration: 4000,
+            position: "top",
+            isClosable: true,
+          });
+        })
+        .then(() => setDescription(""))
+        .then(onClose);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Comment Can't Be Posted!",
+        description: "Please login to your account",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
+    }
+    // Reset state and close the modal
+    setCommentContent("");
+    onCommentModalClose();
+  };
+
+  console.log(data);
   return (
     <>
       <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto flex flex-col gap-4">
@@ -227,6 +282,7 @@ export default function ReportModal({
                 <button
                   type="button"
                   className="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  onClick={onCommentModalOpen}
                 >
                   <svg
                     className="flex-shrink-0 w-4 h-4"
@@ -242,7 +298,7 @@ export default function ReportModal({
                   >
                     <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
                   </svg>
-                  16
+                  Comment
                   <span
                     className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
                     role="tooltip"
@@ -254,6 +310,38 @@ export default function ReportModal({
             </div>
           </div>
         </div>
+        <Modal
+          isOpen={isCommentModalOpen}
+          onClose={onCommentModalClose}
+          isCentered
+          motionPreset="slideInBottom"
+          size="lg"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Add Comment</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <Textarea
+                  value={commentContent}
+                  onChange={(e) => setCommentContent(e.target.value)}
+                  placeholder="Type your comment here"
+                />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" 
+              mr={3} 
+              onClick={() => 
+                handleCommentSubmit(commentContent, data.id)}>
+                Submit
+              </Button>
+              <Button onClick={onCommentModalClose}>Cancel</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </div>
     </>
   );
