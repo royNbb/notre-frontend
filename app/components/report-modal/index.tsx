@@ -15,7 +15,3 @@ import Link from "next/link";
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
-
-export default function ReportModal ({
-    isOpen:
-})

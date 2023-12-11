@@ -50,13 +50,10 @@ export default async function MaterialDetails({
 
     return (
       <>
-        <div>hai</div>
         <ReportModal data={data} type={"material"} />
       </>
     );
   } catch (error) {
-    console.log("hai");
-    console.log(error);
     return (
       <div className="col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4">
         <div className="py-10 lg:pt-32 flex flex-col items-center gap-4">

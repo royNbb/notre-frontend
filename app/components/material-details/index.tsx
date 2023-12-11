@@ -6,6 +6,7 @@ import { Report } from "@/app/interfaces/report";
 import { getIdFromSlug } from "@/app/utils/get-id-from-slug";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useSession } from "next-auth/react";
 import {
   Button,
   Modal,
@@ -20,6 +21,7 @@ import {
   FormControl,
   Input,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { CiFileOn } from "react-icons/ci";
 import { usePathname } from "next/navigation";
@@ -35,30 +37,62 @@ export default function ReportModal({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [description, setDescription] = useState("");
+  const toast = useToast();
+
   //   const [relatedModelName, setRelatedModelName] = useState("");
   //   const [id, setId] = useState(1);
-
-  const handleSubmit = (data: Report) => {
-    console.log();
+  const { data: session } = useSession();
+  const owner = session?.user?.name;
+  const handleSubmit = async (data: Report) => {
+    const token = session?.accessToken;
+    console.log(token);
     console.log(data.related_model_app_label);
     console.log(data.related_model_name);
     console.log(data.related_model_id);
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-    const urlPost = `${baseUrl}/api/v1/report/create/`;
+    const urlPost = `${baseUrl}/report/create/`;
     try {
-      axios
-        .post(urlPost, {
-          description: data.description,
-          related_model_app_label: data.related_model_app_label,
-          related_model_name: data.related_model_name,
+      const result = await axios
+        .post(
+          urlPost,
+          {
+            description: data.description,
+            related_model_app_label: data.related_model_app_label,
+            related_model_name: data.related_model_name,
+            related_model_id: data.related_model_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          toast({
+            title: "Report Submitted!",
+            status: "success",
+            duration: 4000,
+            position: "top",
+            isClosable: true,
+          });
         })
-        .then(() => setDescription(""));
+        .then(() => setDescription(""))
+        .then(onClose);
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Report Cant Be Submitted!",
+        description: "Please login to your account",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
     }
   };
 
-  console.log(description);
+  console.log(data);
   return (
     <>
       <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto flex flex-col gap-4">
@@ -105,6 +139,7 @@ export default function ReportModal({
               onClose={onClose}
               isCentered
               motionPreset="slideInBottom"
+              size="lg"
             >
               <ModalOverlay />
               <ModalContent>
@@ -124,9 +159,9 @@ export default function ReportModal({
                       Please remember that reporting a material may result in
                       the removal of content uploaded by your friends. Your
                       report has the potential to impact not only your
-                      experience but also your friends'. We encourage you to
-                      take this responsibility seriously, as it's valuable not
-                      just for you but for your friends as well.
+                      experience but also your friends. We encourage you to take
+                      this responsibility seriously, as it's valuable not just
+                      for you but for your friends as well.
                     </FormLabel>
                   </FormControl>
                   <FormControl className="pt-5">
@@ -150,8 +185,8 @@ export default function ReportModal({
                     onClick={() =>
                       handleSubmit({
                         description: description,
-                        related_model_app_label: "material",
-                        related_model_name: "material",
+                        related_model_app_label: type,
+                        related_model_name: type,
                         related_model_id: data.owner.id,
                       })
                     }
