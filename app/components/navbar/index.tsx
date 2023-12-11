@@ -17,10 +17,7 @@ const Navbar: FC = () => {
         aria-label='Global'
       >
         <div className='flex items-center justify-between'>
-          <Link
-            href='/'
-            className='flex-none text-xl font-semibold'
-          >
+          <Link href='/' className='flex-none text-xl font-semibold'>
             JawabanKu
           </Link>
           <div className='md:hidden'>
@@ -99,6 +96,18 @@ const Navbar: FC = () => {
             >
               Categories
             </Link>
+
+            {status == "authenticated" && (
+              <Link
+                href='/history'
+                className={twMerge(
+                  "font-medium text-gray-500 hover:text-gray-400 md:py-6",
+                  pathname === "/history" && "text-blue-600"
+                )}
+              >
+                History
+              </Link>
+            )}
 
             <Link
               className={twMerge(
