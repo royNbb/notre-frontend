@@ -44,7 +44,7 @@ export default async function MaterialDetails({
                   <div>
                     <div className='hs-tooltip inline-block [--trigger:hover] [--placement:bottom]'>
                       <div className='hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer'>
-                        <span className='font-semibold text-gray-800 dark:text-gray-200'>
+                        <span className='font-semibold text-gray-800'>
                           {data.owner.name != ""
                             ? data.owner.name
                             : "The owner"}
@@ -75,11 +75,11 @@ export default async function MaterialDetails({
 
           <div className='space-y-5 md:space-y-8'>
             <div className='space-y-3'>
-              <h2 className='text-2xl font-bold md:text-3xl dark:text-white'>
+              <h2 className='text-2xl font-bold md:text-3xl'>
                 {data.title}
               </h2>
 
-              <p className='text-lg text-gray-800 dark:text-gray-200'>
+              <p className='text-lg text-gray-800'>
                 {data.description}
               </p>
             </div>
@@ -110,12 +110,12 @@ export default async function MaterialDetails({
         ))}
 
         <div className='sticky bottom-6 inset-x-0 text-center mt-16'>
-          <div className='inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-gray-800'>
+          <div className='inline-block bg-white shadow-md rounded-full py-3 px-4 '>
             <div className='flex items-center gap-x-1.5'>
               <div className='hs-tooltip inline-block'>
                 <button
                   type='button'
-                  className='hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                  className='hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800'
                 >
                   <svg
                     className='flex-shrink-0 w-4 h-4'
@@ -133,7 +133,7 @@ export default async function MaterialDetails({
                   </svg>
                   16
                   <span
-                    className='hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black'
+                    className='hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm'
                     role='tooltip'
                   >
                     Comment

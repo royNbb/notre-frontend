@@ -27,16 +27,16 @@ export default function Resources() {
   return (
     <div className='max-w-screen-xl grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-24 xl:pt-40'>
       <div className='text-center col-span-3 md:col-span-6 lg:col-span-12'>
-        <h1 className='text-4xl sm:text-6xl font-bold text-gray-800 dark:text-gray-200'>
+        <h1 className='text-4xl sm:text-6xl font-bold text-gray-800'>
           Resources
         </h1>
 
-        <p className='mt-3 text-gray-600 dark:text-gray-400'>
+        <p className='mt-3 text-gray-600'>
           Find and share resources made by students.
         </p>
 
         <div className='mt-7 sm:mt-12 mx-auto max-w-xl relative'>
-          <div className='relative z-10 flex items-center space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]'>
+          <div className='relative z-10 flex items-center space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100'>
             <Input
               placeholder='Search materials'
               variant='unstyled'
@@ -45,7 +45,7 @@ export default function Resources() {
               onKeyDown={handleKeyDown}
             />
             <div className='flex-[0_0_auto]' onClick={handleSearch}>
-              <div className='w-[46px] h-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'>
+              <div className='w-[46px] h-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='16'
@@ -107,7 +107,7 @@ export default function Resources() {
             </svg>
           </div>
         </div>
-        <p className='mt-12 text-gray-600 dark:text-gray-400'>
+        <p className='mt-12 text-gray-600'>
           or{" "}
           <Link href='/categories' className='text-blue-600 hover:underline'>
             browse
