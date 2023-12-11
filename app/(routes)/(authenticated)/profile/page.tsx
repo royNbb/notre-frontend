@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Me() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -150,6 +151,12 @@ export default function Me() {
   useEffect(() => {
     fetchUser();
   }, [status]);
+
+  const router = useRouter();
+
+  if (status == "unauthenticated") {
+    router.push("/");
+  }
 
   if (error) {
     return <div>Something went wrong: {error}</div>;
