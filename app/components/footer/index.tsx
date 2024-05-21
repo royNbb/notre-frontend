@@ -21,13 +21,13 @@ const Footer: FC = () => {
               href='#'
               aria-label='Brand'
             >
-              JawabanKu
+              Notre
             </a>
           </div>
 
           <div className='mt-3'>
             <p className='text-gray-100'>
-              Created by Andrew, Vale, Roy, Cius, Ferry with ♡
+              Brought to you by Notre Team in collaboration with our devs (Andrew, Vale, Cius, and Ferry) with ♡
             </p>
           </div>
         </div>

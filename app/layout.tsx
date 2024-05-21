@@ -7,7 +7,7 @@ import { SWRProviders } from "./providers/swr-providers";
 import SessionProviderWrapper from "./providers/session-provider";
 
 export const metadata: Metadata = {
-  title: "Jawabanku",
+  title: "Notre",
   description: "Sharing your learning materials has never been easier.",
 };
 

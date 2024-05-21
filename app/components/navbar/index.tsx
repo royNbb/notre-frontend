@@ -21,7 +21,7 @@ const Navbar: FC = () => {
             href='/'
             className='flex-none text-xl font-semibold'
           >
-            JawabanKu
+            Notre
           </Link>
           <div className='md:hidden'>
             <button
