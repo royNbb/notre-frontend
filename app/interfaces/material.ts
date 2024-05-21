@@ -18,3 +18,8 @@ export interface Material {
 export interface Materials {
   data: Material[];
 }
+
+export interface UploadedMaterial {
+  fileUrl: string;
+  contentType: string;
+}
