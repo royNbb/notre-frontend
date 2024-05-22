@@ -35,6 +35,16 @@ export default function Resources() {
           Find and share resources made by students.
         </p>
 
+        <div
+          className="pt-10">
+          <Link
+            href="/resources/upload"
+            className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800"
+          >
+            Share a Resource
+          </Link>
+        </div>
+
         <div className='mt-7 sm:mt-12 mx-auto max-w-xl relative'>
           <div className='relative z-10 flex items-center space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100'>
             <Input

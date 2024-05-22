@@ -181,6 +181,11 @@ export default function CreateMaterial({
       <div className="text-2xl font-semibold mb-4">
         Upload any material you want to share with the world ❤️
       </div>
+
+      <div className="text-s pt-2 font-semibold mb-4 text-gray-500">
+        Make sure to click the upload file button before submitting your material
+      </div>
+
       <div className="mt-4 flex items-center gap-4">
         <input
           onChange={(event) => {
@@ -217,6 +222,7 @@ export default function CreateMaterial({
           Upload
         </Button>
       </div>
+
       {uploadedFile && (
         <button
           onClick={(event) => {
