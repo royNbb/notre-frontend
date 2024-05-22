@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Categories, CategoriesByLetter } from "@/app/interfaces/category";
-import { splitCategoriesByLetter } from "@/app/utils/split-category";
+import { Categories, CategoriesByTypeAndLetter } from "@/app/interfaces/category";
+import { splitCategoriesByTypeAndLetter } from "@/app/utils/split-category";
 
 async function getData() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -23,8 +23,7 @@ async function getData() {
 export default async function Categories() {
   try {
     const data: Categories = await getData();
-    const categoriesByLetter: CategoriesByLetter =
-      splitCategoriesByLetter(data);
+    const categoriesByTypeAndLetter: CategoriesByTypeAndLetter = splitCategoriesByTypeAndLetter(data);
 
     return (
       <div className='max-w-screen-xl grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-x-6 gap-y-6 mx-auto'>
@@ -36,22 +35,25 @@ export default async function Categories() {
 
         <hr className='col-span-3 md:col-span-6 lg:col-span-12 mb-10' />
 
-        {Object.entries(categoriesByLetter).map(([letter, categories]) => (
-          <div key={letter} className='col-span-3 md:col-span-6 lg:col-span-12 mb-4'>
-            <h2 className='text-lg font-semibold mb-2'>{letter}</h2>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-              {categories.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/resources/search?category=${encodeURIComponent(
-                    item.name
-                  )}`}
-                  className='cursor-pointer hover:text-blue-600 text-gray-600 text-left'
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+        {Object.entries(categoriesByTypeAndLetter).map(([type, categoriesByLetter]) => (
+          <div key={type} className='col-span-3 md:col-span-6 lg:col-span-12 mb-8'>
+            <h2 className='text-lg font-semibold mb-4'>{type}</h2>
+            {Object.entries(categoriesByLetter).map(([letter, categories]) => (
+              <div key={letter}>
+                <h3 className='text-base font-medium mb-2'>{letter}</h3>
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                  {categories.map((category) => (
+                    <Link
+                      key={category.id}
+                      href={`/resources/search?category=${encodeURIComponent(category.name)}`}
+                      className='cursor-pointer hover:text-blue-600 text-gray-600 text-left'
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -64,7 +66,7 @@ export default async function Categories() {
             Shoot!
           </h2>
           <h2 className='text-center text-gray-600 text-lg'>
-            Something bad hapenned. Please try again later.
+            Something bad happened. Please try again later.
           </h2>
         </div>
       </div>

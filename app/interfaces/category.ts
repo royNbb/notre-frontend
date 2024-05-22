@@ -11,3 +11,9 @@ export interface Category {
 export interface CategoriesByLetter {
   [letter: string]: Category[];
 }
+
+export interface CategoriesByTypeAndLetter {
+  [type: string]: {
+    [letter: string]: Category[];
+  };
+}
