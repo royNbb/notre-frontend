@@ -26,6 +26,9 @@ import {
 } from "@chakra-ui/react";
 import { CiFileOn } from "react-icons/ci";
 import React, { FC, useState } from "react";
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 export default function ReportModal({
   data,
@@ -139,6 +142,10 @@ export default function ReportModal({
     onCommentModalClose();
   };
 
+  const isImage = (url: string) => /\.(jpeg|jpg|gif|png)$/.test(url);
+
+  const isPdf = (url: string) => /\.pdf$/.test(url);
+
   console.log(data);
   return (
     <>
@@ -151,7 +158,7 @@ export default function ReportModal({
                   <div>
                     <div className="hs-tooltip inline-block [--trigger:hover] [--placement:bottom]">
                       <div className="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                        <span className="font-semibold text-gray-800 dark:text-gray-200">
+                        <span className="font-semibold text-gray-700">
                           {data.owner.name != ""
                             ? data.owner.name
                             : "The owner"}
@@ -248,11 +255,11 @@ export default function ReportModal({
 
           <div className="space-y-5 md:space-y-8">
             <div className="space-y-3">
-              <h2 className="text-2xl font-bold md:text-3xl dark:text-white">
+              <h2 className="text-2xl font-bold md:text-3xl ">
                 {data.title}
               </h2>
 
-              <p className="text-lg text-gray-800 dark:text-gray-200">
+              <p className="text-lg text-gray-800">
                 {data.description}
               </p>
             </div>
@@ -287,6 +294,19 @@ export default function ReportModal({
             {category.name}
           </Link>
         ))}
+
+        {isPdf(data.content) ? (
+          <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+            <div style={{ height: '750px' }}>
+              <Viewer fileUrl={data.content} />
+            </div>
+          </Worker>
+        ) : isImage(data.content) ? (
+          <div style={{ textAlign: 'center' }}>
+            <img src={data.content} alt="Material" />
+          </div>
+        ) : null}
+
         <div className="sticky bottom-6 inset-x-0 text-center mt-16">
           <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-gray-800">
             <div className="flex items-center gap-x-1.5">
@@ -312,7 +332,7 @@ export default function ReportModal({
                   </svg>
                   Comment
                   <span
-                    className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
+                    className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm "
                     role="tooltip"
                   >
                     Comment
