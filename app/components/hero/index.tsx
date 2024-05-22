@@ -17,7 +17,7 @@ const Hero: FC = () => {
 
         <div className='mt-5 max-w-3xl text-center mx-auto'>
           <p className='text-lg text-gray-600'>
-            JawabanKu is Your Ultimate Hub for Collaborative Learning and
+            Notre is Your Ultimate Hub for Collaborative Learning and
             Resource Sharing.
           </p>
         </div>
