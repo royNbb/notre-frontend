@@ -3,6 +3,7 @@ import MaterialCard from "@/app/components/material-card";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import { Materials } from "@/app/interfaces/material";
+import { Suspense } from 'react'
 
 import Link from "next/link";
 
@@ -39,6 +40,7 @@ export default function Search() {
   }
 
   return (
+    <Suspense>
     <div className='max-w-screen-xl grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-x-6 gap-y-6 mx-auto'>
       <div className='py-10 lg:pt-16 col-span-3 md:col-span-6 lg:col-span-12'>
         <h2 id='marketing' className='scroll-mt-12 mb-2'>
@@ -79,5 +81,6 @@ export default function Search() {
         data?.data.map((item, index) => <MaterialCard key={index} {...item} />)
       )}
     </div>
+    </Suspense>
   );
 }

@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import { Input } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from 'react'
 
 export default function Resources() {
   const router = useRouter();
@@ -47,13 +48,16 @@ export default function Resources() {
 
         <div className='mt-7 sm:mt-12 mx-auto max-w-xl relative'>
           <div className='relative z-10 flex items-center space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100'>
-            <Input
-              placeholder="Search materials"
-              variant="unstyled"
-              className="mx-4 leading-loose"
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-            />
+            <Suspense>
+              <Input
+                placeholder="Search materials"
+                variant="unstyled"
+                className="mx-4 leading-loose"
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+              />
+            </Suspense>
+
             <div className='flex-[0_0_auto]' onClick={handleSearch}>
               <div className='w-[46px] h-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'>
                 <svg
