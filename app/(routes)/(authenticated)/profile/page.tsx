@@ -174,7 +174,7 @@ export default function Me() {
         <div className='flex flex-col items-center'>
           <div className='w-48 h-48 overflow-hidden rounded-full mb-10'>
             <img
-              src='https://picsum.photos/200'
+              src='/profile-user.png'
               alt='Anonymous User'
               className='w-full h-full object-cover'
             />
