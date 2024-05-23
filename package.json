@@ -11,6 +11,7 @@
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",
     "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
     "axios": "^1.6.2",
     "chakra-react-select": "^4.7.6",
     "dayjs": "^1.11.10",
