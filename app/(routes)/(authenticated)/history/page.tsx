@@ -4,7 +4,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { api } from "@/app/configs/axios";
-import { Histories, History } from "@/app/interfaces/history";
+import type { Histories, History } from "@/app/interfaces/history";
 
 export default function History() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;

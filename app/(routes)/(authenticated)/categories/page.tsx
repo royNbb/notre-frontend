@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Categories, CategoriesByTypeAndLetter } from "@/app/interfaces/category";
+import type { Categories, CategoriesByTypeAndLetter } from "@/app/interfaces/category";
 import { splitCategoriesByTypeAndLetter } from "@/app/utils/split-category";
 
 async function getData() {
