@@ -3,10 +3,10 @@ import { FC } from "react";
 const testimonials = [
   {
     content:
-      '"JawabanKu has been a game-changer in my learning journey. The ability to access and share learning materials has made studying more efficient."',
+      '"Really good"',
     name: "Roy Maruli Tua Nababan",
-    position: "Vice President",
-    company: "TSA UI",
+    position: "Student",
+    company: "CompSci UI",
   },
   {
     content: '"It\'s like a Google Drive, but better."',
@@ -16,7 +16,7 @@ const testimonials = [
   },
   {
     content:
-      '"JawabanKu has revolutionized the way I approach learning, providing a seamless space to share and access materials."',
+      '"Notre has revolutionized the way I approach learning, providing a seamless space to share and access materials."',
     name: "Rahmat Bryan Naufal",
     position: "AI Engineer",
     company: "AMV UI",
