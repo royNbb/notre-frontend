@@ -36,17 +36,17 @@ export default async function Categories() {
         <hr className='col-span-3 md:col-span-6 lg:col-span-12 mb-10' />
 
         {Object.entries(categoriesByTypeAndLetter).map(([type, categoriesByLetter]) => (
-          <div key={type} className='col-span-3 md:col-span-6 lg:col-span-12 mb-8'>
-            <h2 className='text-lg font-semibold mb-4'>{type}</h2>
+          <div key={type} className='col-span-3 md:col-span-6 lg:col-span-12 mb-4 p-3'>
+            <h2 className='text-2xl font-semibold mb-4 '>{type}</h2>
             {Object.entries(categoriesByLetter).map(([letter, categories]) => (
-              <div key={letter}>
-                <h3 className='text-base font-medium mb-2'>{letter}</h3>
-                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+              <div className='pl-3' key={letter}>
+                <h3 className='text-xl font-medium mt-3 '>{letter}</h3>
+                <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 my-2'>
                   {categories.map((category) => (
                     <Link
                       key={category.id}
                       href={`/resources/search?category=${encodeURIComponent(category.name)}`}
-                      className='cursor-pointer hover:text-blue-600 text-gray-600 text-left'
+                      className='cursor-pointer hover:text-blue-600 text-gray-600 text-left mb-1'
                     >
                       {category.name}
                     </Link>

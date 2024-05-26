@@ -317,7 +317,7 @@ export default function CreateMaterial({
                   status: "error",
                   duration: 4000,
                   title: "Something went wrong",
-                  description: "Please try again",
+                  description: "Please login first and fill all the fields",
                   isClosable: true,
                 });
               }

@@ -74,7 +74,7 @@ export default async function MaterialDetails({
             Login first
           </h2>
           <h2 className="text-center text-gray-600 text-lg">
-            You may not have logged in. Please <a href="/login" className="text-blue-500 underline">login</a>  first.
+            You aren't logged in. Please <a href="/login" className="text-blue-500 underline">login</a>  first.
           </h2>
         </div>
       </div>

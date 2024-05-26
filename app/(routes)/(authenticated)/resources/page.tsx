@@ -33,7 +33,7 @@ export default function Resources() {
         </h1>
 
         <p className='mt-3 text-gray-600'>
-          Find and share resources made by students.
+          Find and share resources.
         </p>
 
         <div
