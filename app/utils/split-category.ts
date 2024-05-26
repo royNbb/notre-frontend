@@ -3,7 +3,10 @@ import { CategoriesByTypeAndLetter, Categories } from "../interfaces/category";
 export const splitCategoriesByTypeAndLetter = (
   categories: Categories
 ): CategoriesByTypeAndLetter => {
-  return categories.data.reduce((result, category) => {
+  // Sort categories alphabetically by name first
+  const sortedCategories = categories.data.sort((a, b) => a.name.localeCompare(b.name));
+
+  const result = sortedCategories.reduce((result, category) => {
     const type = category.type;
     const firstLetter = category.name.charAt(0).toUpperCase();
 
@@ -16,10 +19,16 @@ export const splitCategoriesByTypeAndLetter = (
     }
 
     result[type][firstLetter].push(category);
-    result[type][firstLetter] = result[type][firstLetter].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
 
     return result;
   }, {} as CategoriesByTypeAndLetter);
+
+  // Sort each group again to ensure they are alphabetically ordered
+  for (const type in result) {
+    for (const letter in result[type]) {
+      result[type][letter].sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+
+  return result;
 };
