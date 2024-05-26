@@ -71,10 +71,10 @@ export default async function MaterialDetails({
       <div className="col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4">
         <div className="py-10 lg:pt-32 flex flex-col items-center gap-4">
           <h2 className="text-center text-gray-300 text-5xl md:text-7xl font-extrabold">
-            Shoot!
+            Login first
           </h2>
           <h2 className="text-center text-gray-600 text-lg">
-            Something bad hapenned. Please try again later.
+            You may not have logged in. Please <a href="/login" className="text-blue-500 underline">login</a>  first.
           </h2>
         </div>
       </div>
