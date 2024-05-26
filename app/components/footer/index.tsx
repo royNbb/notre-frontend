@@ -27,7 +27,7 @@ const Footer: FC = () => {
 
           <div className='mt-3'>
             <p className='text-gray-100'>
-              Brought to you by Notre Team in collaboration with our devs (Andrew, Vale, Cius, and Ferry) with ♡
+            © 2024 Notre. Dedicated to bringing equal learning opportunities for all.
             </p>
           </div>
         </div>
