@@ -1,8 +1,8 @@
 "use client";
 import { Material, UploadedMaterial } from "@/app/interfaces/material";
 import { useEffect, useState } from "react";
-import { Button, Input, Textarea, useToast } from "@chakra-ui/react";
-import { Select } from "chakra-react-select";
+import { Button, Input, Link, Textarea, useToast } from "@chakra-ui/react";
+import { Select, SingleValue } from "chakra-react-select";
 import { Categories, Category } from "@/app/interfaces/category";
 import useSWR from "swr";
 import { Tag, Tags } from "@/app/interfaces/tag";
@@ -114,7 +114,7 @@ export default function CreateMaterial({
   const toast = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [file, setfile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>(initialData?.title ?? "");
   const [uploadedFile, setUploadedFile] = useState<string | null>(
     initialData?.content ?? null
@@ -135,6 +135,13 @@ export default function CreateMaterial({
   >(
     initialData?.tags?.map((tag) => ({ value: tag.id, label: tag.name })) ?? []
   );
+  const [selectedMajor, setSelectedMajor] = useState<
+    SingleValue<{ value: number; label: string }> | null
+  >(null);
+  const [selectedCourse, setSelectedCourse] = useState<
+    SingleValue<{ value: number; label: string }> | null
+  >(null);
+  const [courses, setCourses] = useState<{ value: number; label: string }[]>([]);
 
   useEffect(() => {
     if (initialData) {
@@ -149,10 +156,10 @@ export default function CreateMaterial({
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const {
-    data: categories,
-    error: categoryError,
-    isLoading: isFetchingCategories,
-  } = useSWR<Categories>(`${apiUrl}/category/`);
+    data: majors,
+    error: majorError,
+    isLoading: isFetchingMajors,
+  } = useSWR<Categories>(`${apiUrl}/category/?type=Major`);
 
   const {
     data: tags,
@@ -160,8 +167,38 @@ export default function CreateMaterial({
     isLoading: isFetchingTags,
   } = useSWR<Tags>(`${apiUrl}/tag/`);
 
-  if (isFetchingCategories || isFetchingTags) return "Loading ...";
-  if (categoryError || tagError) {
+  useEffect(() => {
+    if (selectedMajor) {
+      console.log(`${apiUrl}/category/?type=Course&major=${selectedMajor.value}`)
+      fetch(`${apiUrl}/category/?type=Course&major=${selectedMajor.value}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCourses(
+            data.data.map((course: { id: number; name: string }) => ({
+              value: course.id,
+              label: course.name,
+            }))
+          );
+        })
+        .catch((error) => console.error("Failed to fetch courses", error));
+    } else {
+      setCourses([]);
+      setSelectedCourse(null);
+    }
+  }, [selectedMajor]);
+
+  useEffect(() => {
+    if (selectedMajor && selectedCourse) {
+      setSelectedCategories([
+        { value: selectedMajor.value, label: selectedMajor.label },
+        { value: selectedCourse.value, label: selectedCourse.label },
+      ]);
+    }
+  }, [selectedMajor, selectedCourse]);
+
+
+  if (isFetchingMajors || isFetchingTags) return "Loading ...";
+  if (majorError || tagError) {
     return (
       <div className="col-span-3 md:col-span-6 lg:col-span-12 flex flex-col items-center gap-4">
         <div className="py-10 lg:pt-32 flex flex-col items-center gap-4">
@@ -169,7 +206,7 @@ export default function CreateMaterial({
             Shoot!
           </h2>
           <h2 className="text-center text-gray-600 text-lg">
-            Something bad hapenned. Please try again later.
+            Something bad happened. Please try again later.
           </h2>
         </div>
       </div>
@@ -190,7 +227,7 @@ export default function CreateMaterial({
         <input
           onChange={(event) => {
             if (event.target.files && event.target.files[0]) {
-              setfile(event.target.files[0]);
+              setFile(event.target.files[0]);
             }
           }}
           type="file"
@@ -264,21 +301,47 @@ export default function CreateMaterial({
       </div>
       {type === "create" && (
         <div className="mt-4 w-1/2 flex flex-col">
-          <div className="font-semibold text-xl mb-3">Select the category</div>
+          <div className="font-semibold text-xl mb-3">Select the major</div>
           <Select
             options={
-              categories
-                ? categories.data.map(({ id, name }) => ({
+              majors
+                ? majors.data.map(({ id, name }) => ({
                     value: id,
                     label: name,
                   }))
                 : []
             }
-            onChange={(newValue) => setSelectedCategories([...newValue])}
-            value={selectedCategories}
-            placeholder="Select the category of the material you are uploading"
-            isMulti
+            onChange={(newValue) => {
+              setSelectedMajor(newValue);
+            }}
+            value={selectedMajor}
+            placeholder="Select the major of the material you are uploading"
           />
+        </div>
+      )}
+      {type === "create" && selectedMajor && (
+          <div className="mt-4 w-1/2 flex flex-col">
+            <div className="font-semibold text-xl mb-3">Select the course</div>
+            <Select
+              options={courses}
+              onChange={(newValue) => setSelectedCourse(newValue)}
+              value={selectedCourse}
+              placeholder="Select the course of the material you are uploading"
+            />
+            <div className="mt-2 mx-5 text-s text-gray-500">don't see the course you're looking for? Add it right{" "}       
+              <Link href="/categories/course/add" className="text-blue-600 hover:underline">
+                  <span className="text-blue-600">here</span>
+              </Link>
+            </div>
+          </div>
+
+      )}
+      {type === "create" && !selectedMajor && (
+        <div className="mt-4 w-1/2 flex flex-col">
+          <div className="font-semibold text-xl mb-3">Select the course</div>
+          <div className="bg-gray-100 p-2 rounded-md">
+            <div className="text-red-500">Select the major first!</div>
+          </div>        
         </div>
       )}
       {type === "create" && (
