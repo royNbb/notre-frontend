@@ -65,33 +65,49 @@ function CategoriesContent() {
       </div>
 
       {data.data.length === 0 ? (
-        <div className="flex flex-col items-center justify-center my-12">
-          <h2 className="text-5xl font-extrabold text-gray-300 mb-4">Oops!</h2>
-          <p className="text-lg text-gray-600 mb-8">No courses found in {major}</p>
-        </div>
-      ) : (
-        <div className="space-y-8">
-          {Object.entries(categoriesByLetter).map(([letter, categories]) => (
-            <div key={letter}>
-            <h2 className="text-3xl font-bold text-gray-700 mb-4">
-              {letter}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/resources/search?category=${encodeURIComponent(category.name)}`}
-                >
-                  <div className="block p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 bg-white text-gray-700 hover:text-blue-600">
-                    {category.name}
-                  </div>
-                </Link>
-              ))}
-            </div>
+        <div>
+          <div className="flex flex-col items-center justify-center my-12  p-8 ">
+            <h2 className="text-5xl font-extrabold text-gray-800 mb-4">Oops!</h2>
+            <p className="text-lg text-gray-700 mb-8">No courses found in {major}</p>
           </div>
-          ))}
+        </div>
+        
+
+      ) : (
+        <div>
+          <div className="space-y-8">
+            {Object.entries(categoriesByLetter).map(([letter, categories]) => (
+              <div key={letter}>
+              <h2 className="text-3xl font-bold text-gray-700 mb-4">
+                {letter}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    href={`/resources/search?category=${encodeURIComponent(category.name)}`}
+                  >
+                    <div className="block p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 bg-white text-gray-700 hover:text-blue-600">
+                      {category.name}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            ))}
+          </div>
         </div>
       )}
+      <div className="flex flex-col items-center justify-center my-12 mt-20 p-3 rounded-lg shadow-lg">
+        <p className="text-xl font-bold text-gray-600 mb-2">Don't see the course you're looking for?</p>
+        <p className="text-gray-600 mb-2">Add it to our system so others and you can share resources in that course.</p>
+        <Link
+          href="/categories/course/add"
+          className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800 mb-10"
+        >
+          Add Course
+        </Link>
+      </div>
     </div>
   );
 }
