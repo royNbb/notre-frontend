@@ -366,6 +366,16 @@ export default function CreateMaterial({
       <Button
         onClick={async () => {
           if (type === "create") {
+            if (!uploadedFile) {
+              toast({
+                status: "error",
+                duration: 4000,
+                title: "Upload File First!",
+                description: "Please click the upload button after you select the file",
+                isClosable: true,
+              });
+            }
+
             const material = await createMaterial(
               data?.accessToken ?? "",
               {

@@ -76,7 +76,7 @@ export default function CreateCourse() {
 
   return (
     <div className="flex flex-col items-center py-10 px-4">
-      <h1 className="text-4xl font-bold mb-6">Create New Course</h1>
+      <h1 className="text-4xl font-bold mb-6">Register New Course</h1>
 
       <div className="w-full max-w-md">
         <div className="mb-4">

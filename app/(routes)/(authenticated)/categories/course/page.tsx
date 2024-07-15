@@ -65,7 +65,7 @@ function CategoriesContent() {
         <div>
           <div className="flex flex-col items-center justify-center my-12  p-8 ">
             <h2 className="text-5xl font-extrabold text-gray-800 mb-4">Oops!</h2>
-            <p className="text-lg text-gray-700 mb-8">No courses found in {major}</p>
+            <p className="text-lg text-gray-700 mb-8">0 course found in {major}</p>
           </div>
         </div>
         
@@ -95,7 +95,7 @@ function CategoriesContent() {
           </div>
         </div>
       )}
-      <div className="flex flex-col items-center justify-center my-12 mt-20 p-3 rounded-lg shadow-lg">
+      <div className="flex flex-col items-center justify-center my-12 mt-18 p-3 rounded-lg shadow-lg">
         <p className="text-xl font-bold text-gray-600 mb-2">Don't see the course you're looking for?</p>
         <p className="text-gray-600 mb-2">Add it to our system so others and you can share resources in that course.</p>
         <Link
