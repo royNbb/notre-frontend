@@ -100,7 +100,7 @@ const Navbar: FC = () => {
             >
               Categories
             </Link>
-            {status === "authenticated" && (
+            {/* {status === "authenticated" && (
               <Link
                 href="/history"
                 className={twMerge(
@@ -110,7 +110,7 @@ const Navbar: FC = () => {
               >
                 History
               </Link>
-            )}
+            )} */}
             <Link
               className={twMerge(
                 "flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6",
