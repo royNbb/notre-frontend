@@ -68,30 +68,27 @@ function CategoriesContent() {
         <div className="flex flex-col items-center justify-center my-12">
           <h2 className="text-5xl font-extrabold text-gray-300 mb-4">Oops!</h2>
           <p className="text-lg text-gray-600 mb-8">No courses found in {major}</p>
-          {/* Uncomment below to add a link for exploring other resources */}
-          {/* <Link
-            href="/categories"
-            className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-full text-sm font-medium transition duration-200"
-          >
-            Explore Other Resources
-          </Link> */}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-8">
           {Object.entries(categoriesByLetter).map(([letter, categories]) => (
-            <div key={letter} className="space-y-4">
-              <h2 className="text-3xl font-bold text-gray-700 mb-2">{letter}</h2>
+            <div key={letter}>
+            <h2 className="text-3xl font-bold text-gray-700 mb-4">
+              {letter}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/resources/search?category=${encodeURIComponent(category.name)}`}
                 >
-                  <a className="block p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 bg-white text-gray-700 hover:text-blue-600">
+                  <div className="block p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 bg-white text-gray-700 hover:text-blue-600">
                     {category.name}
-                  </a>
+                  </div>
                 </Link>
               ))}
             </div>
+          </div>
           ))}
         </div>
       )}

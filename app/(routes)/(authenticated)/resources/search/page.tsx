@@ -48,10 +48,15 @@ export default function Search() {
             {title ?? category}
           </a>
         </h2>
-
-        <p className='text-sm text-gray-600'>
-          Learning resources for "{title ?? category}"
-        </p>
+        {title ? (
+          <p className='text-sm text-gray-600'>
+            Learning resources for "{title}"
+          </p>
+        ):(
+          <p className='text-sm text-gray-600'>
+            Learning resources in Course: "{category}"
+          </p>
+        )}
       </div>
       <hr className='col-span-3 md:col-span-6 lg:col-span-12 mb-10' />
       {isLoading && (
@@ -76,6 +81,14 @@ export default function Search() {
           >
             Explore Other Resources
           </Link>
+
+          <Link
+            href="/resources/upload"
+            className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800"
+          >
+            Share Your Resource
+          </Link>
+
         </div>
       ) : (
         data?.data.map((item, index) => <MaterialCard key={index} {...item} />)
