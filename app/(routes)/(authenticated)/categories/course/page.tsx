@@ -1,13 +1,10 @@
 "use client";
-import MaterialCard from "@/app/components/material-card";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
-import { Materials } from "@/app/interfaces/material";
 import { Suspense } from 'react';
 import Link from "next/link";
 import { Categories, CategoriesByLetter } from "@/app/interfaces/category";
 import { splitCategoriesByLetter } from "@/app/utils/split-category";
-import { api } from "@/app/configs/axios";
 
 // Fetcher function for useSWR
 const fetcher = async (url: string): Promise<Categories> => {
