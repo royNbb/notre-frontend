@@ -34,10 +34,6 @@ const CommentsList: React.FC<CommentsListProps> = ({ comments, type }) => {
   const { data: session } = useSession();
   const handleSubmit = async (data: Report) => {
     const token = session?.accessToken;
-    console.log(token);
-    console.log(data.related_model_app_label);
-    console.log(data.related_model_name);
-    console.log(data.related_model_id);
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const urlPost = `${baseUrl}/report/create/`;
     try {
