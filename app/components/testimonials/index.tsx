@@ -4,15 +4,15 @@ const testimonials = [
   {
     content:
       '"Really good"',
-    name: "Roy Maruli Tua Nababan",
+    name: "Roy Nababan",
     position: "Student",
     company: "CompSci UI",
   },
   {
-    content: '"It\'s like a Google Drive, but better."',
-    name: "Valerian Salim",
-    position: "Coach",
-    company: "Kokocoder",
+    content: '"Notre telah membantu saya menjadi skibidi rizzler di ohio dengan level 5000 gyatt dan +99999 aura "',
+    name: "Ahmad Yasri",
+    position: "Certified Sigma",
+    company: "Ohio Rizz Academy",
   },
   {
     content:
