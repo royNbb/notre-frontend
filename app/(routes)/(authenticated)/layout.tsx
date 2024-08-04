@@ -1,6 +1,6 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
-
+import { Analytics } from "@vercel/analytics/react";
 export default function BaseLayout({
   children,
 }: {
