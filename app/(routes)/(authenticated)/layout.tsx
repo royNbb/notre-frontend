@@ -11,6 +11,7 @@ export default function BaseLayout({
       <Navbar />
       <main className='w-full px-4 md:px-8 lg:px-16'>{children}</main>
       <Footer />
+      <Analytics />
     </>
   );
 }
