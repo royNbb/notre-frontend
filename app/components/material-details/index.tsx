@@ -149,7 +149,7 @@ export default function ReportModal({
   console.log(data);
   return (
     <>
-      <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto flex flex-col gap-4">
+      <div className="max-w-3xl px-4 pt-6 pb-2 lg:pt-10 pb-1 sm:px-6 lg:px-8 mx-auto flex flex-col gap-4">
         <div className="max-w-2xl">
           <div className="flex justify-between items-center mb-6">
             <div className="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
@@ -295,6 +295,8 @@ export default function ReportModal({
           </Link>
         ))}
 
+        <div className="m-1"></div>
+
         {isPdf(data.content) ? (
           <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
             <div style={{ height: '750px' }}>
@@ -307,7 +309,7 @@ export default function ReportModal({
           </div>
         ) : null}
 
-        <div className="sticky bottom-6 inset-x-0 text-center mt-16">
+        <div className="bottom-6 inset-x-0 text-center mt-16">
           <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-gray-800">
             <div className="flex items-center gap-x-1.5">
               <div className="hs-tooltip inline-block">

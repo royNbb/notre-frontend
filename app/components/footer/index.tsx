@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Footer: FC = () => {
   return (
-    <div className="flex-1 flex flex-col justify-end">
+    <div className="flex-1 flex flex-col justify-end z-50">
       <div className='relative min-w-[100%] max-w-[100%] h-48 md:h-80 mt-16'>
         <Image
           src='/footer-bg.svg'
