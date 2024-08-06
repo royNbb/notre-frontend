@@ -95,12 +95,16 @@ function CategoriesContent() {
           </div>
         </div>
       )}
-      <div className="flex flex-col items-center justify-center my-12 mt-18 p-3 rounded-lg shadow-lg">
-        <p className="text-xl font-bold text-gray-600 mb-2">Don't see the course you're looking for?</p>
-        <p className="text-gray-600 mb-2">Add it to our system so others and you can share resources in that course.</p>
+      <div className="flex flex-col items-center justify-center my-12 p-3 rounded-lg shadow-lg">
+        <p className="text-xl font-bold text-gray-600 mb-2">
+          Don't see the course you're looking for?
+        </p>
+        <p className="text-gray-600 mb-4">
+          Add it to our system so others and you can share resources in that course.
+        </p>
         <Link
           href="/categories/course/add"
-          className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800 mb-10"
+          className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800"
         >
           Add Course
         </Link>
