@@ -18,9 +18,32 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (password.length < 8) {
+      toast({
+        title: "Error",
+        description: "Password must be at least 8 characters long.",
+        status: "error",
+        duration: 2000,
+        position: "top",
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match.",
+        status: "error",
+        duration: 2000,
+        position: "top",
+      });
+      return;
+    }
 
     const userData = {
       email,
@@ -229,6 +252,44 @@ export default function Register() {
                     id='password-error'
                   >
                     8+ characters required
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='confirm-password'
+                    className='block text-sm mb-2'
+                  >
+                    Confirm Password
+                  </label>
+                  <div className='relative'>
+                    <Input
+                      type='password'
+                      id='confirm-password'
+                      name='confirm-password'
+                      className='py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
+                      required
+                      aria-describedby='confirm-password-error'
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <div className='hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3'>
+                      <svg
+                        className='h-5 w-5 text-red-500'
+                        width='16'
+                        height='16'
+                        fill='currentColor'
+                        viewBox='0 0 16 16'
+                        aria-hidden='true'
+                      >
+                        <path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+                      </svg>
+                    </div>
+                  </div>
+                  <p
+                    className='hidden text-xs text-red-600 mt-2'
+                    id='confirm-password-error'
+                  >
+                    Passwords do not match
                   </p>
                 </div>
 
